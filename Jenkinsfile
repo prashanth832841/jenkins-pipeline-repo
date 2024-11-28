@@ -50,16 +50,19 @@ pipeline {
         stage('Regression Testing') {
         steps {
         echo 'Running regression tests'
-    }
-  }
+       }
+      }
+             
      stage('Acceptance Testing') {
         steps {
         echo 'Running acceptance tests'
        }
       }
-     }
+     
+         
+    }
     }  
-        }
+    }
     }
 }
 }
