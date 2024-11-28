@@ -1,13 +1,16 @@
 pipeline { 
     agent any 
     stages { 
-        stage("Checkout /Clone from Git & Maven Build") { 
+        
+        stage("Checkout") { 
             steps { 
                       git branch: "Main" ,   url : "https://github.com/devopsusergit/PetStoreWebApp.git"
                       sh  'mvn clean'
                       sh  ' mvn package'
             } 
         } 
+        
+        
         stage('Clean and Package') {
         steps {
         echo 'Cleaning workspace and packaging'
@@ -18,26 +21,30 @@ pipeline {
         }
 
 
-        stage('Stage 3') {
+      stage('Test Stage') {
       steps {
         script {
           echo 'This is for stage 3 assessment.'
         }
       }
     }
-    stage('Test Stage') {
+    
+        
+        stage('Parallel Stages ') {
         parallel {
-        stage('Performance Testing') {
-            steps{
-            echo 'Running performance tests'
+        
+        stage('Code Quality Check') {
+        steps{
+            echo 'Running Quality tests'
           }
          }
             
-       stage('Code Quality Check') {
+       stage('Performance Test') {
          steps {
-         echo 'Running code quality checks'
+         echo 'Running Performance checks'
          }
         }
+            
         stage('Regression and Acceptance testing'){
          stages{          
         stage('Regression Testing') {
