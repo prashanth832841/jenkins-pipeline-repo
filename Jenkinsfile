@@ -1,6 +1,8 @@
 pipeline { 
     agent any 
     stages { 
+       
+        
         stage("Checkout") { 
             steps { 
                       git branch: "Main" ,   url : "https://github.com/devopsusergit/PetStoreWebApp.git"
@@ -8,6 +10,9 @@ pipeline {
                       sh  ' mvn package'
             } 
         } 
+
+
+        
         stage('Clean and Package') {
         steps {
         echo 'Cleaning workspace and packaging'
@@ -17,6 +22,8 @@ pipeline {
 
         }
 
+
+        
         stage('Test Stage') {
         steps {
         echo 'Cleaning workspace and packaging'
@@ -25,35 +32,39 @@ pipeline {
         }
 
         }
-        stage('Regression Acceptance Testing') {
-        stages {
-        stage('Regression Testing') {
-        steps {
-        echo 'Running regression tests'
-    }
-  }
-     stage('Acceptance Testing') {
-        steps {
-        echo 'Running acceptance tests'
-       }
-      }
-     }
-    } 
+        
 
 
- stage('Testing') {
-                   stage('Parallel Tasks') {
-              parallel {
-        stage('Performance Testing') {
+
+ 
+        stage('Parallel Stages') {
+        parallel {
+        stage('Code Quality Check') {
             steps{
             echo 'Running performance tests'
           }
          }
-       stage('Code Quality Check') {
+       stage('Performance test') {
          steps {
          echo 'Running code quality checks'
          }
         }
+            stage('sequence stages'){
+                sequence{
+                          stage('Regression Test') {
+            steps{
+            echo 'Running Regression tests'
+          }
+         }
+                            stage('Acceptance Test) {
+            steps{
+            echo 'Running Acceptance tests'
+          }
+         }
+                }
+                
+            }
+                
      }
 }
 
