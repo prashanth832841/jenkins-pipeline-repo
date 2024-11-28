@@ -49,19 +49,25 @@ pipeline {
          echo 'Running code quality checks'
          }
         }
-            stage('sequence stages'){
-                sequence{
-                          stage('Regression Test') {
+        
+            
+        stage('sequence stages'){
+       
+            stage('Regression Test') {
             steps{
             echo 'Running Regression tests'
-          }
-         }
-                            stage('Acceptance Test) {
+            }
+            }
+                            
+            
+            stage('Acceptance Test) {
             steps{
             echo 'Running Acceptance tests'
-          }
-         }
-                }
+            }
+            }
+               
+                  
+                  
                 
             }
                 
