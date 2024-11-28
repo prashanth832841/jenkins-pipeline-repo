@@ -50,9 +50,9 @@ pipeline {
          }
         }
         
-            
+       stages{      
         stage('sequence stages'){
-       stages{
+      
             stage('Regression Test') {
             steps{
             echo 'Running Regression tests'
