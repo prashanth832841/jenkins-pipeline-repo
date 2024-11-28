@@ -1,18 +1,13 @@
 pipeline { 
     agent any 
     stages { 
-       
-        
-        stage("Checkout") { 
+        stage("Checkout /Clone from Git & Maven Build") { 
             steps { 
                       git branch: "Main" ,   url : "https://github.com/devopsusergit/PetStoreWebApp.git"
                       sh  'mvn clean'
                       sh  ' mvn package'
             } 
         } 
-
-
-        
         stage('Clean and Package') {
         steps {
         echo 'Cleaning workspace and packaging'
@@ -23,65 +18,44 @@ pipeline {
         }
 
 
-        
-        stage('Test Stage') {
-        steps {
-        echo 'Cleaning workspace and packaging'
-        sh 'mvn clean package'
-
+        stage('Stage 3') {
+      steps {
+        script {
+          echo 'This is for stage 3 assessment.'
         }
-
-        }
-        
-
-
-
- 
-        stage('Parallel Stages') {
+      }
+    }
+    stage('Test Stage') {
         parallel {
-        stage('Code Quality Check') {
+        stage('Performance Testing') {
             steps{
             echo 'Running performance tests'
           }
          }
-       stage('Performance test') {
+            
+       stage('Code Quality Check') {
          steps {
          echo 'Running code quality checks'
          }
         }
-    
-            
-    stage('sequence'){
-       stages{      
-        stage('sequence stages'){
-      
-            stage('Regression Test') {
-            steps{
-            echo 'Running Regression tests'
-            }
-            }
-                            
-            
-            stage('Acceptance Test') {
-            steps{
-            echo 'Running Acceptance tests'
-            }
-            }
-               
-                  }     
-                  
-                
-            }
-                
-     }
-}
-        }
-
-
-
-        
+        stage('Regression and Acceptance testing'){
+         stages{          
+        stage('Regression Testing') {
+        steps {
+        echo 'Running regression tests'
+    }
   }
-
+     stage('Acceptance Testing') {
+        steps {
+        echo 'Running acceptance tests'
+       }
+      }
+     }
+    }  
+        }
+    }
+}
+}
 
                                                             
 
