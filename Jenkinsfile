@@ -49,7 +49,9 @@ pipeline {
          echo 'Running code quality checks'
          }
         }
-    stage('sequence')
+    
+            
+    stage('sequence'){
        stages{      
         stage('sequence stages'){
       
@@ -73,6 +75,7 @@ pipeline {
                 
      }
 }
+        }
 
 
 
