@@ -60,7 +60,7 @@ pipeline {
             }
                             
             
-            stage('Acceptance Test) {
+            stage('Acceptance Test') {
             steps{
             echo 'Running Acceptance tests'
             }
