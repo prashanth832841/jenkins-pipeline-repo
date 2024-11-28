@@ -45,7 +45,7 @@ pipeline {
          }
         }
             
-        stage('Regression and Acceptance testing'){
+        stage('Sequence'){
          stages{          
         stage('Regression Testing') {
         steps {
